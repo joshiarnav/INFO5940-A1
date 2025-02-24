@@ -124,7 +124,7 @@ Now, your API key will be automatically loaded inside the container.
 
 ---
 
-##  Sources
+## 📄 Sources
 
 - Course Material ([lecture-05 branch of INFO-5940](https://github.com/AyhamB/INFO-5940/tree/lecture-05))
 - [FAISS Documentation](https://github.com/facebookresearch/faiss)
