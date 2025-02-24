@@ -18,7 +18,7 @@ Before starting, ensure you have the following installed on your system:
 
 ## 🚀 Setup Guide
 
-The installation for this assignment should be nearly identical to cloning and setting up the repository straight from GitHub. However, due to minor errors in the setup that currently exist in the repository (and some inefficiencies), the instructions are in a different order and slightly modified.
+The installation for this assignment should be nearly identical to cloning and setting up the repository straight from GitHub. However, due to minor issues in the setup that currently exist in the repository (and some inefficiencies), the instructions are in a different order and slightly modified.
 
 ---
 
@@ -31,7 +31,7 @@ git clone https://github.com/joshiarnav/INFO5940-A1.git
 cd INFO5940-A1
 ```
 
----
+
 
 ### 2️⃣ Configure OpenAI API Key  
 
@@ -76,7 +76,7 @@ Since `docker-compose.yml` expects environment variables, follow these steps:
 
 Now, your API key will be automatically loaded inside the container.
 
----
+
 
 ### 3️⃣ Open in VS Code with Docker  
 
@@ -89,7 +89,7 @@ Now, your API key will be automatically loaded inside the container.
 
 📌 **Note:** If you don’t see this option, ensure that the **Dev Containers** extension is installed.
 
----
+
 
 ### 4️⃣ Run Streamlit App  
 
@@ -121,6 +121,14 @@ Now, your API key will be automatically loaded inside the container.
 - Modified `README.md`:
     - Modified name of the extension for **Dev Containers** (`Dev Containers: Rebuild and Reopen in Container`). The original instructions in the [lecture-05 branch of INFO-5940](https://github.com/AyhamB/INFO-5940/tree/lecture-05) were for **Remote - Containers** which is deprecated.
     - Moved API key setup before starting the container (this avoids rebuilding the container to add the API key).
+
+---
+
+##  Sources
+
+- Course Material ([lecture-05 branch of INFO-5940](https://github.com/AyhamB/INFO-5940/tree/lecture-05))
+- [FAISS Documentation](https://github.com/facebookresearch/faiss)
+- [OpenAI Platform Page](https://platform.openai.com/docs/guides/embeddings)
 
 ---
 
