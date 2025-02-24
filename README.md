@@ -4,14 +4,14 @@ Arnav Joshi's submission for Assignment #1 of INFO 5940.
 
 ---
 
-## 🛠️ Prerequisites  
+## 🛠️ Prerequisites
 
-Before starting, ensure you have the following installed on your system:  
+Before starting, ensure you have the following installed on your system:
 
-- [Docker](https://www.docker.com/get-started) (Ensure Docker Desktop is running)  
-- [VS Code](https://code.visualstudio.com/)  
-- [VS Code Remote - Containers Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)  
-- [Git](https://git-scm.com/)  
+- [Docker](https://www.docker.com/get-started) (Ensure Docker Desktop is running)
+- [VS Code](https://code.visualstudio.com/)
+- [VS Code Remote - Containers Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+- [Git](https://git-scm.com/)
 - OpenAI API Key
 
 ---
@@ -22,30 +22,34 @@ The installation for this assignment should be nearly identical to cloning and s
 
 ---
 
-### 1️⃣ Clone the Repository  
+### 1️⃣ Clone the Repository
 
-Open a terminal and run:  
+Open a terminal and run:
 
 ```bash
 git clone https://github.com/joshiarnav/INFO5940-A1.git
 cd INFO5940-A1
 ```
 
+### 2️⃣ Configure OpenAI API Key
 
+Since `docker-compose.yml` expects environment variables, follow these steps:
 
-### 2️⃣ Configure OpenAI API Key  
+#### ➤ Option 1: Set the API Key in `.env` (Recommended)
 
-Since `docker-compose.yml` expects environment variables, follow these steps:  
+1. Inside the project folder, create a `.env` file:
 
-#### ➤ Option 1: Set the API Key in `.env` (Recommended)  
+   ```pwsh
+   ni .env
+   ```
 
-1. Inside the project folder, create a `.env` file:  
+   or for Mac:
 
    ```bash
    touch .env
    ```
 
-2. Add your API key and base URL:  
+2. Add your API key and base URL:
 
    ```plaintext
    OPENAI_API_KEY=your-api-key-here
@@ -53,48 +57,23 @@ Since `docker-compose.yml` expects environment variables, follow these steps:
    TZ=America/New_York
    ```
 
-3. Modify `docker-compose.yml` to include this `.env` file:  
-
-   ```yaml
-   version: '3.8'
-   services:
-     devcontainer:
-       container_name: info-5940-devcontainer
-       build:
-         dockerfile: Dockerfile
-         target: devcontainer
-       environment:
-         - OPENAI_API_KEY=${OPENAI_API_KEY}
-         - OPENAI_BASE_URL=${OPENAI_BASE_URL}
-         - TZ=${TZ}
-       volumes:
-         - '$HOME/.aws:/root/.aws'
-         - '.:/workspace'
-       env_file:
-         - .env
-   ```
-
 Now, your API key will be automatically loaded inside the container.
 
+### 3️⃣ Open in VS Code with Docker
 
-
-### 3️⃣ Open in VS Code with Docker  
-
-1. Open **VS Code**, navigate to the `INFO5940-A1` folder.  
-2. Open the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P` on Mac) and search for:  
+1. Open **VS Code**, navigate to the `INFO5940-A1` folder.
+2. Open the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P` on Mac) and search for:
    ```
    Dev Containers: Rebuild and Reopen in Container
    ```
-3. Select this option. VS Code will build and open the project inside the container.  
+3. Select this option. VS Code will build and open the project inside the container.
 
 📌 **Note:** If you don’t see this option, ensure that the **Dev Containers** extension is installed.
 
+### 4️⃣ Run Streamlit App
 
-
-### 4️⃣ Run Streamlit App  
-
-1. Navigate to the `INFO5940-A1` folder.  
-2. Run:  
+1. Navigate to the `INFO5940-A1` folder.
+2. Run:
    ```bash
    streamlit run advanced_chat.py
    ```
@@ -109,18 +88,18 @@ Now, your API key will be automatically loaded inside the container.
 - Added faiss-cpu package to the poetry packages (`poetry add faiss-cpu`).
 - Added PyPDF2 package to the poetry packages (`poetry add PyPDF2`).
 - Deleted any extraneous folders/files for the assignment:
-    - `/notebooks`
-    - `/data`
-    - `chat_with_pdf.py`
-    - `chat_with_rag.py`
-    - `Chatbot.py`
-    - `poetry.lock` (explained above)
-    - Old `README.md`
-    - `summary.py`
-    - `tokens.py`
+  - `/notebooks`
+  - `/data`
+  - `chat_with_pdf.py`
+  - `chat_with_rag.py`
+  - `Chatbot.py`
+  - `poetry.lock` (explained above)
+  - Old `README.md`
+  - `summary.py`
+  - `tokens.py`
 - Modified `README.md`:
-    - Modified name of the extension for **Dev Containers** (`Dev Containers: Rebuild and Reopen in Container`). The original instructions in the [lecture-05 branch of INFO-5940](https://github.com/AyhamB/INFO-5940/tree/lecture-05) were for **Remote - Containers** which is deprecated.
-    - Moved API key setup before starting the container (this avoids rebuilding the container to add the API key).
+  - Modified name of the extension for **Dev Containers** (`Dev Containers: Rebuild and Reopen in Container`). The original instructions in the [lecture-05 branch of INFO-5940](https://github.com/AyhamB/INFO-5940/tree/lecture-05) were for **Remote - Containers** which is deprecated.
+  - Moved API key setup before starting the container (this avoids rebuilding the container to add the API key).
 
 ---
 
@@ -132,30 +111,33 @@ Now, your API key will be automatically loaded inside the container.
 
 ---
 
-## 🛠️ Troubleshooting  
+## 🛠️ Troubleshooting
 
-### **Container Fails to Start?**  
-- Ensure **Docker Desktop is running**.  
-- Run `docker-compose up --build` again.  
-- If errors persist, delete existing containers with:  
+### **Container Fails to Start?**
+
+- Ensure **Docker Desktop is running**.
+- Run `docker-compose up --build` again.
+- If errors persist, delete existing containers with:
 
   ```bash
   docker-compose down
   ```
 
-  Then restart:  
+  Then restart:
 
   ```bash
   docker-compose up --build
   ```
 
-### **Cannot Access Jupyter Notebook from outside VS Code?**  
-- Ensure you’re using the correct port (`8888`).  
-- Run `docker ps` to check if the container is running.  
+### **Cannot Access Jupyter Notebook from outside VS Code?**
 
-### **OpenAI API Key Not Recognized?**  
-- Check if `.env` is correctly created.  
-- Ensure `docker-compose.yml` includes `env_file: - .env`.  
-- Restart the container after making changes (`docker-compose up --build`).  
+- Ensure you’re using the correct port (`8888`).
+- Run `docker ps` to check if the container is running.
+
+### **OpenAI API Key Not Recognized?**
+
+- Check if `.env` is correctly created.
+- Ensure `docker-compose.yml` includes `env_file: - .env`.
+- Restart the container after making changes (`docker-compose up --build`).
 
 ---
