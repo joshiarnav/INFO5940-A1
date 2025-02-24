@@ -1,8 +1,6 @@
----
+# Assignment #1 Development of a RAG App
 
-# 📌 INFO-5940
-
-Welcome to the **INFO-5940** repository! This guide will help you set up the development environment using **Docker** in **VS Code**, configure the **OpenAI API key**, manage Git branches, and run Jupyter notebooks for assignments.  
+Arnav Joshi's submission for Assignment #1 of INFO 5940.
 
 ---
 
@@ -14,37 +12,28 @@ Before starting, ensure you have the following installed on your system:
 - [VS Code](https://code.visualstudio.com/)  
 - [VS Code Remote - Containers Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)  
 - [Git](https://git-scm.com/)  
-- OpenAI API Key  
+- OpenAI API Key
 
 ---
 
-## 🚀 Setup Guide  
+## 🚀 Setup Guide
+
+The installation for this assignment should be nearly identical to cloning and setting up the repository straight from GitHub. However, due to minor errors in the setup that currently exist in the repository (and some inefficiencies), the instructions are in a different order and slightly modified.
+
+---
 
 ### 1️⃣ Clone the Repository  
 
 Open a terminal and run:  
 
 ```bash
-git clone https://github.com/AyhamB/INFO-5940.git
-cd INFO-5940
+git clone https://github.com/joshiarnav/INFO5940-A1.git
+cd INFO5940-A1
 ```
 
 ---
 
-### 2️⃣ Open in VS Code with Docker  
-
-1. Open **VS Code**, navigate to the `INFO-5940` folder.  
-2. Open the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P` on Mac) and search for:  
-   ```
-   Remote-Containers: Reopen in Container
-   ```
-3. Select this option. VS Code will build and open the project inside the container.  
-
-📌 **Note:** If you don’t see this option, ensure that the **Remote - Containers** extension is installed.  
-
----
-
-### 3️⃣ Configure OpenAI API Key  
+### 2️⃣ Configure OpenAI API Key  
 
 Since `docker-compose.yml` expects environment variables, follow these steps:  
 
@@ -85,69 +74,53 @@ Since `docker-compose.yml` expects environment variables, follow these steps:
          - .env
    ```
 
-4. Restart the container:  
+Now, your API key will be automatically loaded inside the container.
 
-   ```bash
-   docker-compose up --build
+---
+
+### 3️⃣ Open in VS Code with Docker  
+
+1. Open **VS Code**, navigate to the `INFO5940-A1` folder.  
+2. Open the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P` on Mac) and search for:  
    ```
+   Dev Containers: Rebuild and Reopen in Container
+   ```
+3. Select this option. VS Code will build and open the project inside the container.  
 
-Now, your API key will be automatically loaded inside the container.  
-
----
-
-## 🔀 Managing Git Branches in VS Code  
-
-Since you may need to switch between different branches for assignments, here’s how to manage Git branches in **VS Code** efficiently.  
-
-### **Option 1: Using the Git Panel (Easiest)**
-1. Open **VS Code**.
-2. Click on the **Source Control** panel on the left (`Ctrl+Shift+G` / `Cmd+Shift+G` on Mac).
-3. Click on the **branch name** (bottom-left corner of VS Code).
-4. A dropdown will appear with all available branches.
-5. Select the branch you want to switch to.  
-
-### **Option 2: Using Command Palette**
-1. Open **VS Code**.
-2. Press `Ctrl+Shift+P` (`Cmd+Shift+P` on Mac) to open the **Command Palette**.
-3. Type **"Git: Checkout to..."** and select it.
-4. Pick the branch you want to switch to.
-
-### **Option 3: Using the Terminal**
-If you prefer the command line inside the container, use:
-
-```bash
-git branch   # View all branches
-git checkout branch-name   # Switch to a branch
-git pull origin branch-name   # Update the branch (recommended)
-```
-
-📌 **Tip:** If you are working on a new feature, create a new branch before making changes:
-
-```bash
-git checkout -b new-feature-branch
-```
+📌 **Note:** If you don’t see this option, ensure that the **Dev Containers** extension is installed.
 
 ---
 
-## 🏃 Running Jupyter Notebook From Outside VS Code
+### 4️⃣ Run Streamlit App  
 
-Once inside the **VS Code Dev Container**, you should be able to run the notebooks from the IDE but you can also launch the Jupyter Notebook server:  
-
-```bash
-jupyter notebook --ip 0.0.0.0 --port=8888 --no-browser --allow-root
-```
+1. Navigate to the `INFO5940-A1` folder.  
+2. Run:  
+   ```bash
+   streamlit run advanced_chat.py
+   ```
+3. Open a browser and navigate to `http://localhost:8501` (or the port number shown in the terminal if different).
+4. Upload and chat! Supports PDFs and text files (plural) and utilizes FAISS for vectorization, vector store, and vector similarity search. Utilizes OpenAI's Embeddings (to create vector embeddings) and LLMs (for chat).
 
 ---
 
-### 5️⃣ Access Jupyter Notebook  
+## 📌 Changes Made
 
-When the notebook starts, it will output a URL like this:  
-
-```
-http://127.0.0.1:8888/?token=your_token_here
-```
-
-Copy and paste this link into your browser to access the Jupyter Notebook interface.  
+- Deleted old poetry.lock file (there was a dependency error on all tested machines in the existing `poetry.lock` file in the [lecture-05 branch of INFO-5940](https://github.com/AyhamB/INFO-5940/tree/lecture-05)).
+- Added faiss-cpu package to the poetry packages (`poetry add faiss-cpu`).
+- Added PyPDF2 package to the poetry packages (`poetry add PyPDF2`).
+- Deleted any extraneous folders/files for the assignment:
+    - `/notebooks`
+    - `/data`
+    - `chat_with_pdf.py`
+    - `chat_with_rag.py`
+    - `Chatbot.py`
+    - `poetry.lock` (explained above)
+    - Old `README.md`
+    - `summary.py`
+    - `tokens.py`
+- Modified `README.md`:
+    - Modified name of the extension for **Dev Containers** (`Dev Containers: Rebuild and Reopen in Container`). The original instructions in the [lecture-05 branch of INFO-5940](https://github.com/AyhamB/INFO-5940/tree/lecture-05) were for **Remote - Containers** which is deprecated.
+    - Moved API key setup before starting the container (this avoids rebuilding the container to add the API key).
 
 ---
 
@@ -178,11 +151,3 @@ Copy and paste this link into your browser to access the Jupyter Notebook interf
 - Restart the container after making changes (`docker-compose up --build`).  
 
 ---
-
-## 🎯 Next Steps  
-
-- Complete assignments using the Jupyter Notebook.  
-- Use the **OpenAI API** inside Python scripts within the container.  
-- Switch between **Git branches** as needed for different assignments.  
-
-Happy coding! 🚀
